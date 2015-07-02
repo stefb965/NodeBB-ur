@@ -89,6 +89,12 @@ module.exports = function(User) {
 						db.setObject('user:' + uid, userData, next);
 					},
 					function(next) {
+						db.setObjectField('user:' + userData.uid + ':settings', "sendPostNotifications", "1", next);
+					},
+					function(next) {
+						db.setObjectField('user:' + userData.uid + ':settings', "sendChatNotifications", "1", next);
+					},
+					function(next) {
 						async.parallel([
 							function(next) {
 								db.incrObjectField('global', 'userCount', next);
